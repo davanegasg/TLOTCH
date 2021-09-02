@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 782257eae53adc14ca20bb3c07d5a6bc, type: 3}
+  m_Name: Wolf
+  m_EditorClassIdentifier: 
+  _name: Wolf
+  description: 
+  frontSprite: {fileID: 21300000, guid: cd259d9d4f8ba2749a16d1cc64d46bec, type: 3}
+  backSprite: {fileID: 21300000, guid: ed8e1d9976a1fd94d961840d8f6e7764, type: 3}
+  attribute1: 4
+  attribute2: 7
+  maxHp: 50
+  attack: 60
+  defense: 30
+  spAttack: 70
+  spDefense: 50
+  speed: 75
+  learnableMoves:
+  - moveBase: {fileID: 11400000, guid: c7f06b414741b464993fab9570ad42a5, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 813ef1044c061f2439f8bb86c50feaeb, type: 2}
+    level: 1
