@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
    
     private Vector2 input;
     private Character character;
+    public event Action OnEncountered;
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
             if (input.x != 0) input.y = 0;
             if (input != Vector2.zero)
             {
+                
                 StartCoroutine(character.Move(input,OnMoveOver));
             }
         }
@@ -35,13 +37,14 @@ public class PlayerController : MonoBehaviour
     private void OnMoveOver()
     {
         var colliders = Physics2D.OverlapCircleAll(transform.position - new Vector3(0, character.OffsetY), 0.2f, GameLayers.i.TriggerableLayers);
-        
+ 
+
         foreach (var collider in colliders)
         {
             var triggerable = collider.GetComponent<IPlayerTriggerable>();
             if(triggerable!= null)
             {
-                
+                character.Animator.IsMoving=false;
                 triggerable.OnPlayerTriggered(this);
                 break;
             }

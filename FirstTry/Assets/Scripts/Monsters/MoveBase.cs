@@ -20,7 +20,7 @@ public class MoveBase : ScriptableObject
     public MonsterAttribute Type { get { return type; } }
     public int Power { get { return power; } }
     public int Accuracy { get { return accuracy; } }
-    public int Pp { get { return pp; } }
+    public int PP { get { return pp; } }
 }
 
 
