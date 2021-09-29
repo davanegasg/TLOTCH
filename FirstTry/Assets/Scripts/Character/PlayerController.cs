@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Character character;
     public event Action OnEncountered;
 
+
     private void Awake()
     {
         character = GetComponent<Character>();
@@ -32,8 +33,23 @@ public class PlayerController : MonoBehaviour
             }
         }
         character.HandleUpdate();
+        if(Input.GetKeyDown(KeyCode.Z))
+        {
+            Interact();
+        }
     }
 
+    void Interact()
+    {
+        var faceDir = new Vector3(character.Animator.MoveX, character.Animator.MoveY);
+        var interactPos = transform.position + faceDir;
+        var collider = Physics2D.OverlapCircle(interactPos, 0.3f, GameLayers.i.InteractableLayer);
+        if(collider != null)
+        {
+            collider.GetComponent<Interactable>()?.Interact();
+        }
+
+    }
     private void OnMoveOver()
     {
         var colliders = Physics2D.OverlapCircleAll(transform.position - new Vector3(0, character.OffsetY), 0.2f, GameLayers.i.TriggerableLayers);
@@ -53,4 +69,5 @@ public class PlayerController : MonoBehaviour
     }
     public Character Character => character;
 
+    
 }

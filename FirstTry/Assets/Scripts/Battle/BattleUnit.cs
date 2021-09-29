@@ -8,6 +8,17 @@ public class BattleUnit : MonoBehaviour
 {
     
     [SerializeField] bool isPlayerUnit;
+    [SerializeField] BattleHUD hud;
+
+
+    public BattleHUD Hud
+    {
+        get { return hud; }
+    }
+    public bool IsPlayerUnit
+    {
+        get { return isPlayerUnit; }
+    }
 
     Image image;
     Vector3 originalPos;
@@ -25,8 +36,10 @@ public class BattleUnit : MonoBehaviour
         Monster = monster;
         if (isPlayerUnit)
             image.sprite = Monster.Base.BackSprite;
+        
         else
             image.sprite = Monster.Base.FrontSprite;
+        hud.SetData(monster);
         image.color = originalColor;
         PlayEnterAnimation();
     }

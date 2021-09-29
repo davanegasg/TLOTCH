@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class BattleDialogBox : MonoBehaviour
 {
@@ -117,7 +118,8 @@ public class BattleDialogBox : MonoBehaviour
 
     public void SetAnswers(List<Answer> answers)
     {
-        for (int i = 0; i < moveTexts.Count; i++)
+        Randomize(answers);
+        for(int i = 0; i < answerTexts.Count; i++)
         {
             if (i < answers.Count)
             {
@@ -128,6 +130,20 @@ public class BattleDialogBox : MonoBehaviour
                 answerTexts[i].text = "-";
             }
         }
+
+    }
+
+    public List<Answer> Randomize(List<Answer> answers)
+    {
+        System.Random rand = new System.Random();
+        for (int i = 0; i < moveTexts.Count; i++)
+        {
+            int j = rand.Next(i, moveTexts.Count);
+            Answer temp = answers[i];
+            answers[i] = answers[j];
+            answers[j] = temp;
+        }
+        return answers;
     }
 
 }
