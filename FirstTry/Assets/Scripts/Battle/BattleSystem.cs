@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public enum BattleState { Start, ActionSelection, MoveSelection, PerformMove, Busy, Question,BattleOver }
+public enum BattleState { Start, ActionSelection, MoveSelection, PerformMove, Busy, Question,BattleOver,Run }
 
 public class BattleSystem : MonoBehaviour
 {
@@ -138,7 +138,15 @@ public class BattleSystem : MonoBehaviour
 
         if (isFainted)
         {
-            yield return dialogBox.TypeDialog($"{targetUnit.Monster.Base.name } fainted");
+            if(targetUnit.Monster.Base.name == "Myself")
+            {
+                yield return dialogBox.TypeDialog($"You have fainted");
+            }
+            else
+            {
+                yield return dialogBox.TypeDialog($"{targetUnit.Monster.Base.name } fainted");
+            }
+            
             targetUnit.PlayFaintAnimation();
             yield return new WaitForSeconds(2f);
             CheckForBattleover(targetUnit);
@@ -169,6 +177,10 @@ public class BattleSystem : MonoBehaviour
         else if(state== BattleState.Question)
         {
             HandleAnswerSelector();
+        }
+        else if(state== BattleState.Run)
+        {
+
         }
     }
 
@@ -201,8 +213,20 @@ public class BattleSystem : MonoBehaviour
             else if(currentAction==1)
             {
                 //Run
+                StartCoroutine(Run());
             }
         }
+    }
+    IEnumerator Run()
+    {
+        state = BattleState.Run;
+        dialogBox.EnableActionSelector(false);
+        yield return dialogBox.TypeDialog($"You have escaped the battle");
+        yield return new WaitForSeconds(1f);
+        yield return dialogBox.TypeDialog($"press Z to continue");
+        yield return StartCoroutine(WaitForKeyDown(KeyCode.Z));
+        BattleOver(false);
+        
     }
 
     void HandleMoveSelector()
