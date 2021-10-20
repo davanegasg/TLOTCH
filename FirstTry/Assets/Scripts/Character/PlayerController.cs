@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
    
     private Vector2 input;
     private Character character;
-    public event Action OnEncountered;
+    public event Action<Collider2D> OnEnterTrainersView;
 
 
     private void Awake()
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
         var collider = Physics2D.OverlapCircle(interactPos, 0.3f, GameLayers.i.InteractableLayer);
         if(collider != null)
         {
-            collider.GetComponent<Interactable>()?.Interact();
+            collider.GetComponent<Interactable>()?.Interact(transform);
         }
 
     }
@@ -66,6 +66,16 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        CheckIfInTrainersView();
+    }
+
+    private void CheckIfInTrainersView()
+    {
+        var collider = Physics2D.OverlapCircle(transform.position, 0.2f, GameLayers.i.FovLayer);
+        if (collider!=null)
+        {
+            OnEnterTrainersView?.Invoke(collider);
+        }
     }
     public Character Character => character;
 

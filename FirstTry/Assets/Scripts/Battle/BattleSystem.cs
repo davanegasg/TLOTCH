@@ -8,10 +8,9 @@ public enum BattleState { Start, ActionSelection, MoveSelection, PerformMove, Bu
 public class BattleSystem : MonoBehaviour
 {
     [SerializeField] BattleUnit playerUnit;
-    [SerializeField] QuestionS question;
+    [SerializeField] QuestionS questions;
     [SerializeField] BattleUnit enemyUnit;
     [SerializeField] BattleDialogBox dialogBox;
-
     public event Action<bool> OnBattleOver;
 
     BattleState state;
@@ -27,15 +26,15 @@ public class BattleSystem : MonoBehaviour
         StartCoroutine(SetupBattle());
     }
 
-    
+
 
     public IEnumerator SetupBattle()
     {
         playerUnit.Setup(me.getMyself());
         enemyUnit.Setup(wildMonster);
-        question.Setup();
+        questions.Setup();
         dialogBox.SetMoveNames(playerUnit.Monster.Moves);
-        dialogBox.SetAnswers(question.Questions.Answers);
+        dialogBox.SetAnswers(questions.Questions.Answers);
         yield return StartCoroutine(dialogBox.TypeDialog($"{enemyUnit.Monster.Base.Description}"));
         yield return new WaitForSeconds(1f);
 
@@ -65,7 +64,7 @@ public class BattleSystem : MonoBehaviour
     void QuestionMove()
     {
         state = BattleState.Question;
-        dialogBox.SetAnswers(question.Questions.Answers);
+        dialogBox.SetAnswers(questions.Questions.Answers);
         dialogBox.EnableActionSelector(false);
         dialogBox.EnableDialogText(false);
         dialogBox.EnableMoveSelector(false);
@@ -89,22 +88,26 @@ public class BattleSystem : MonoBehaviour
     IEnumerator CorrectAnswer()
     {
         state = BattleState.Busy;
-        var answer = question.Questions.Answers[currentAnswer];
+        var answer = questions.Questions.Answers[currentAnswer];
         yield return dialogBox.TypeDialog($"You answered {answer.Base.Name}");
         yield return new WaitForSeconds(1f);
 
-        if (answer.Base==question.Questions.Base.CorrectAnswer.Base)
+        if (answer.Base==questions.Questions.Base.CorrectAnswer.Base)
         {
             yield return dialogBox.TypeDialog($"Correct answer!");
             yield return new WaitForSeconds(1f);
+            questions.AddCount();
+            questions.updateQuestion();
             StartCoroutine(PlayerMove());
         }
         else
         {
             yield return dialogBox.TypeDialog($"Wrong answer!");
             yield return new WaitForSeconds(1f);
-            yield return dialogBox.TypeDialog($"{question.Questions.Base.Feedback} press Z to continue");
+            yield return dialogBox.TypeDialog($"{questions.Questions.Base.Feedback} press Z to continue");
             yield return StartCoroutine(WaitForKeyDown(KeyCode.Z));
+            questions.AddCount();
+            questions.updateQuestion();
             StartCoroutine(EnemyMove());
         }
     }
@@ -302,7 +305,7 @@ public class BattleSystem : MonoBehaviour
                 currentAnswer -= 2;
             }
         }
-        dialogBox.UpdateAnswerSelection(currentAnswer,question.Questions);
+        dialogBox.UpdateAnswerSelection(currentAnswer,questions.Questions);
         if (Input.GetKeyDown(KeyCode.Z))
         {
             
