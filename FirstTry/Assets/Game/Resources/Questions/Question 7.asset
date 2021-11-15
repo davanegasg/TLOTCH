@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fadabbc942293349ab4b2979dbda450, type: 3}
+  m_Name: Question 7
+  m_EditorClassIdentifier: 
+  _name: Pregunta7
+  description: "\xBFQuien creo la programacion?"
+  feedback:
+  - A pesar de que nuestro maestro se llame Helmuth el no fue
+  - "quien creo la programaci\xF3n, fuimos nosotros mismos!!! Los"
+  - humanos!
+  correctAnswer:
+    answerBase: {fileID: 11400000, guid: 05b79e40278a5904e8cf95c3b2cc23cf, type: 2}
+  answers:
+  - answerBase: {fileID: 11400000, guid: 05b79e40278a5904e8cf95c3b2cc23cf, type: 2}
+  - answerBase: {fileID: 11400000, guid: a19274bfd9c8f224f8ae819791da5584, type: 2}
+  - answerBase: {fileID: 11400000, guid: 760c680f1e6e652448c66e14f52a1e34, type: 2}
+  - answerBase: {fileID: 11400000, guid: 627211a256d3c1348ad68e76328b005e, type: 2}

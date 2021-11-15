@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterController : MonoBehaviour, Interactable
+public class MonsterController : MonoBehaviour, Interactable, ISavable
 {
     [SerializeField] Dialog dialog;
     [SerializeField] GameObject exclamation;
-    [SerializeField] GameObject Fov;
+    [SerializeField] GameObject fov;
 
     //State
 
@@ -23,15 +23,13 @@ public class MonsterController : MonoBehaviour, Interactable
         SetFovRotation(character.Animator.DefaultDirection);
     }
 
-    public void Interact(Transform initiator)
+    public IEnumerator Interact(Transform initiator)
     {
         if (!battleLost)
         {
             character.LookTowards(initiator.position);
-            StartCoroutine(DialogManager.Instance.ShowDialog(dialog, () =>
-            {
-                GameController.Instance.StartSetBattle(this);
-            }));
+            yield return DialogManager.Instance.ShowDialog(dialog);
+            GameController.Instance.StartSetBattle(this);
         }
 
     }
@@ -48,15 +46,17 @@ public class MonsterController : MonoBehaviour, Interactable
         yield return character.Move(moveVec);
 
         //Show dialog
-        StartCoroutine(DialogManager.Instance.ShowDialog(dialog, () =>
-         {
-             GameController.Instance.StartSetBattle(this);
-         }));
+        yield return DialogManager.Instance.ShowDialog(dialog);
+        GameController.Instance.StartSetBattle(this);
     }
-    public void BattleLoss()
+    public void BattleLost()
     {
         battleLost = true;
-        this.gameObject.SetActive(false);
+        fov.gameObject.SetActive(false);
+        this.GetComponent<Renderer>().enabled = false;
+        this.GetComponent<BoxCollider2D>().enabled=false;
+        
+
     }
     public void SetFovRotation(FacingDirection dir)
     {
@@ -73,6 +73,25 @@ public class MonsterController : MonoBehaviour, Interactable
         {
             angle = 270f;
         }
-        Fov.transform.eulerAngles = new Vector3(0f, 0f, angle);
+        fov.transform.eulerAngles = new Vector3(0f, 0f, angle);
     }
+
+    public object CaptureState()
+{
+    return battleLost;
+}
+
+    public void RestoreState(object state)
+    {
+        battleLost = (bool)state;
+
+        if (battleLost)
+        {
+            fov.gameObject.SetActive(false);
+            this.GetComponent<Renderer>().enabled = false;
+            this.GetComponent<BoxCollider2D>().enabled = false;
+        }
+    }
+
+
 }

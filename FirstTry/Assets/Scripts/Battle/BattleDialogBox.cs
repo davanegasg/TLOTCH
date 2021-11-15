@@ -8,7 +8,6 @@ public class BattleDialogBox : MonoBehaviour
 {
     [SerializeField] Text dialogText;
     [SerializeField] int lettersPerSecond;
-    [SerializeField] Color highlightedColor;
     [SerializeField] GameObject actionSelector;
     [SerializeField] GameObject moveSelector;
     [SerializeField] GameObject moveDetails;
@@ -20,6 +19,14 @@ public class BattleDialogBox : MonoBehaviour
     [SerializeField] GameObject question;
     [SerializeField] List<Text> answerTexts;
     [SerializeField] Text questionText;
+
+    Color highlightedColor;
+
+    private void Start()
+    {
+        highlightedColor = GlobalSettings.i.HighlightedColor;
+    }
+
     public void SetDialog(string dialog)
     {
         dialogText.text = dialog;
@@ -33,6 +40,7 @@ public class BattleDialogBox : MonoBehaviour
             dialogText.text += letter;
             yield return new WaitForSeconds(1f / lettersPerSecond);
         }
+        yield return new WaitForSeconds(1f);
     }
 
     public void EnableDialogText(bool enabled)
@@ -83,6 +91,16 @@ public class BattleDialogBox : MonoBehaviour
         }
         ppText.text = $"PP{move.PP}/{move.Base.PP}";
         typeText.text = move.Base.Type.ToString();
+
+        
+       
+
+        if (move.PP == 0)
+            ppText.color = Color.red;
+        else if (move.PP <= move.Base.PP/2)
+            ppText.color = Color.yellow;
+        else
+            ppText.color = Color.black;
     }
 
     public void UpdateAnswerSelection(int selectedAnswer,Question question)
@@ -121,28 +139,25 @@ public class BattleDialogBox : MonoBehaviour
         Randomize(answers);
         for(int i = 0; i < answerTexts.Count; i++)
         {
-            if (i < answers.Count)
-            {
+
                 answerTexts[i].text = answers[i].Base.Name;
-            }
-            else
-            {
-                answerTexts[i].text = "-";
-            }
+            
         }
 
     }
 
     public List<Answer> Randomize(List<Answer> answers)
     {
+        Debug.Log($"{answers.Count}");
         System.Random rand = new System.Random();
-        for (int i = 0; i < moveTexts.Count; i++)
+        for (int i = 0; i < answerTexts.Count; i++)
         {
-            int j = rand.Next(i, moveTexts.Count);
+            int j = rand.Next(i, answerTexts.Count);
             Answer temp = answers[i];
             answers[i] = answers[j];
             answers[j] = temp;
         }
+        
         return answers;
     }
 

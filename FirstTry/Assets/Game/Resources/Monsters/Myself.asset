@@ -12,24 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 782257eae53adc14ca20bb3c07d5a6bc, type: 3}
   m_Name: Myself
   m_EditorClassIdentifier: 
-  _name: Player
+  _name: El jugador
   description: 
   frontSprite: {fileID: 21300000, guid: 818cf159951cf9a4e8e810b2bbab4096, type: 3}
   backSprite: {fileID: 21300000, guid: 18fc6e8e3f72b154fba88f358748be28, type: 3}
-  attribute1: 0
+  attribute1: 3
   attribute2: 0
-  maxHp: 100
+  maxHp: 890
   attack: 10
   defense: 10
   spAttack: 10
   spDefense: 10
   speed: 10
+  expYield: 64
   learnableMoves:
   - moveBase: {fileID: 11400000, guid: 530bb857ab0802d498f9691c3ec2ade9, type: 2}
     level: 1
   - moveBase: {fileID: 11400000, guid: 7a8993c63bcc7cb428eae01b71c577ac, type: 2}
     level: 1
+  - moveBase: {fileID: 11400000, guid: 200a5e64186af9348a0d3034334ca807, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 9dd4af4f4ec892f4999042728961cff5, type: 2}
+    level: 1
   - moveBase: {fileID: 11400000, guid: c7f06b414741b464993fab9570ad42a5, type: 2}
-    level: 3
+    level: 9
   - moveBase: {fileID: 11400000, guid: 90e3091dd4ccbde40a00136132853cbd, type: 2}
-    level: 5
+    level: 7

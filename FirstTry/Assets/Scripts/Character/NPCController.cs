@@ -7,6 +7,10 @@ public class NPCController : MonoBehaviour, Interactable
     [SerializeField] Dialog dialog;
     [SerializeField] List<Vector2> movementPattern;
     [SerializeField] float timeBetweenPatterns;
+    [SerializeField] QuestBase questToStart;
+    [SerializeField] QuestBase questToComplete;
+    Quest activeQuest;
+    ItemGiver itemGiver;
     int currentPatten = 0;
     Character character;
     NPCState state;
@@ -14,16 +18,52 @@ public class NPCController : MonoBehaviour, Interactable
     private void Awake()
     {
         character = GetComponent<Character>();
+        itemGiver = GetComponent<ItemGiver>();
     }
 
     
-    public void Interact(Transform initiator)
+    public IEnumerator Interact(Transform initiator)
     {
         if(state== NPCState.Idle)
         {
             state = NPCState.Dialog;
             character.LookTowards(initiator.position);
-            StartCoroutine(DialogManager.Instance.ShowDialog(dialog,()=> { idleTimer = 0f;  state = NPCState.Idle; }));
+            if(questToComplete != null)
+            {
+                var quest = new Quest(questToComplete);
+                yield return quest.CompleteQuest(initiator);
+                questToComplete = null;
+            }
+            if (questToStart != null)
+            {
+                activeQuest = new Quest(questToStart);
+                yield return activeQuest.StartQuest();
+                questToStart = null;
+            }
+            else if (activeQuest!= null)
+            {
+                if(activeQuest.CanBeCompleted())
+                {
+                    yield return activeQuest.CompleteQuest(initiator);
+                    activeQuest = null; 
+                }
+                else
+                {
+                    yield return DialogManager.Instance.ShowDialog(activeQuest.Base.InProgressDialog);
+                }
+            }
+            else if (itemGiver != null && itemGiver.CanBeGiven())
+            {
+                yield return itemGiver.GiveItem(initiator.GetComponent<PlayerController>());
+            }
+            else
+            {
+                yield return DialogManager.Instance.ShowDialog(dialog);
+                
+            }
+            idleTimer = 0;
+            state = NPCState.Idle;
+
         }    
         
     }

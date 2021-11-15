@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Wolf
   m_EditorClassIdentifier: 
   _name: Wolf
-  description: '*Growls*'
-  frontSprite: {fileID: 21300000, guid: cd259d9d4f8ba2749a16d1cc64d46bec, type: 3}
-  backSprite: {fileID: 21300000, guid: ed8e1d9976a1fd94d961840d8f6e7764, type: 3}
+  description: "*Gru\xF1ido*"
+  frontSprite: {fileID: 21300000, guid: 6511db959fa90ed489f164dcf81ea1e8, type: 3}
+  backSprite: {fileID: 21300000, guid: 6511db959fa90ed489f164dcf81ea1e8, type: 3}
   attribute1: 4
   attribute2: 7
   maxHp: 50
@@ -24,8 +24,9 @@ MonoBehaviour:
   spAttack: 70
   spDefense: 50
   speed: 75
+  expYield: 70
   learnableMoves:
-  - moveBase: {fileID: 11400000, guid: c7f06b414741b464993fab9570ad42a5, type: 2}
+  - moveBase: {fileID: 11400000, guid: 0943af9d70a2bd04a9e70094779f1f99, type: 2}
     level: 1
   - moveBase: {fileID: 11400000, guid: 813ef1044c061f2439f8bb86c50feaeb, type: 2}
     level: 1

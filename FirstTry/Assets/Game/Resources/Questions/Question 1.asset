@@ -13,13 +13,14 @@ MonoBehaviour:
   m_Name: Question 1
   m_EditorClassIdentifier: 
   _name: Pregunta1
-  description: "\xBFQue es un modelo de cascada?"
-  feedback: Es un flujo de desarrollo de software donde se entrega el resultado al
-    final
+  description: "\xBFQue es un algorimo?"
+  feedback:
+  - Un algoritmo es un conjunto de operaciones que te permiten
+  - hallar solucion a un problema
   correctAnswer:
-    answerBase: {fileID: 11400000, guid: 13b101684bf5e8943ac6c7927ad4d1de, type: 2}
+    answerBase: {fileID: 11400000, guid: cf9c4651980671a4db85126a44c09ad7, type: 2}
   answers:
-  - answerBase: {fileID: 11400000, guid: 13b101684bf5e8943ac6c7927ad4d1de, type: 2}
-  - answerBase: {fileID: 11400000, guid: 36eefc876b94aff47b2ae01020062528, type: 2}
-  - answerBase: {fileID: 11400000, guid: 678bd2291987df74cbcc91008e1b8041, type: 2}
   - answerBase: {fileID: 11400000, guid: cf9c4651980671a4db85126a44c09ad7, type: 2}
+  - answerBase: {fileID: 11400000, guid: 678bd2291987df74cbcc91008e1b8041, type: 2}
+  - answerBase: {fileID: 11400000, guid: 36eefc876b94aff47b2ae01020062528, type: 2}
+  - answerBase: {fileID: 11400000, guid: 775c6f0ea3036314d912b099b359ebeb, type: 2}

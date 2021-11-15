@@ -14,7 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Tackle
   description: 
-  type: 4
+  type: 1
   power: 30
   accuracy: 60
   pp: 30
+  category: 0
+  effects:
+    boosts: []
+  target: 0

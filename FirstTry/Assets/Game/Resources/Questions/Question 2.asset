@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fadabbc942293349ab4b2979dbda450, type: 3}
   m_Name: Question 2
   m_EditorClassIdentifier: 
-  _name: Pregunta1
-  description: "\xBFHolo como estas?"
-  feedback: Realmente es muy bien
+  _name: Pregunta2
+  description: "\xBFQue es programar?"
+  feedback:
+  - "Programar son todas aquellas posibles respuestas y m\xE1s!"
+  - Puedes hacer de todo!
   correctAnswer:
-    answerBase: {fileID: 11400000, guid: 13b101684bf5e8943ac6c7927ad4d1de, type: 2}
+    answerBase: {fileID: 11400000, guid: 6a250ca700452b34d8d9894e9d244d5e, type: 2}
   answers:
   - answerBase: {fileID: 11400000, guid: 13b101684bf5e8943ac6c7927ad4d1de, type: 2}
-  - answerBase: {fileID: 11400000, guid: 36eefc876b94aff47b2ae01020062528, type: 2}
-  - answerBase: {fileID: 11400000, guid: 678bd2291987df74cbcc91008e1b8041, type: 2}
-  - answerBase: {fileID: 11400000, guid: cf9c4651980671a4db85126a44c09ad7, type: 2}
+  - answerBase: {fileID: 11400000, guid: 7cc7a8868ba08884f9a19d583012b588, type: 2}
+  - answerBase: {fileID: 11400000, guid: 0e783e7196116964dade731c0abe5cbc, type: 2}
+  - answerBase: {fileID: 11400000, guid: 6a250ca700452b34d8d9894e9d244d5e, type: 2}

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Taurus
   m_EditorClassIdentifier: 
   _name: Taurus
-  description: Rawr, This wil be your doom!
+  description: Rawr, este sera tu fin!!
   frontSprite: {fileID: 21300000, guid: c7093ca2003fcd0448c642b9cebf46cf, type: 3}
   backSprite: {fileID: 21300000, guid: 4ad46572811440e479a498ba4754f89d, type: 3}
-  attribute1: 3
+  attribute1: 2
   attribute2: 4
   maxHp: 45
   attack: 49
@@ -24,10 +24,15 @@ MonoBehaviour:
   spAttack: 65
   spDefense: 65
   speed: 20
+  expYield: 70
   learnableMoves:
+  - moveBase: {fileID: 11400000, guid: a98b90de9b261bf4191e47f8ec8d8d2e, type: 2}
+    level: 2
+  - moveBase: {fileID: 11400000, guid: c6280857253c68c429fbcb6ae007ada7, type: 2}
+    level: 1
+  - moveBase: {fileID: 11400000, guid: 62c84d55def525140bf2c01b9a346c96, type: 2}
+    level: 2
+  - moveBase: {fileID: 11400000, guid: 90e3091dd4ccbde40a00136132853cbd, type: 2}
+    level: 1
   - moveBase: {fileID: 11400000, guid: c7f06b414741b464993fab9570ad42a5, type: 2}
     level: 1
-  - moveBase: {fileID: 11400000, guid: 0943af9d70a2bd04a9e70094779f1f99, type: 2}
-    level: 1
-  - moveBase: {fileID: 11400000, guid: 90e3091dd4ccbde40a00136132853cbd, type: 2}
-    level: 2

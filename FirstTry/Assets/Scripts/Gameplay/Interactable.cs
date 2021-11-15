@@ -5,6 +5,6 @@ using UnityEngine;
 public interface Interactable
 {
     // Start is called before the first frame update
-    void Interact(Transform initiator); 
+    IEnumerator Interact(Transform initiator); 
         
 }

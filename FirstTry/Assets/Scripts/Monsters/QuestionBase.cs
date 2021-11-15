@@ -10,16 +10,19 @@ public class QuestionBase : ScriptableObject
     [TextArea]
     [SerializeField] string description;
     [TextArea]
-    [SerializeField] string feedback;
+    [SerializeField] List<string> feedback;
     [SerializeField] PossibleAnswer correctAnswer;
 
     [SerializeField] List<PossibleAnswer> answers;
 
     public string Name { get { return _name; } }
     public string Description { get { return description; } }
-    public string Feedback { get { return feedback; } }
+    public List<string> Feedback { get { return feedback; } }
     public List<PossibleAnswer> Answers { get { return answers; } }
     public PossibleAnswer CorrectAnswer { get { return correctAnswer; } }
+
+    
+
 }
 [System.Serializable]
 

@@ -12,9 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f963e80ac4cbbd14fae0e7513e618908, type: 3}
   m_Name: Bite
   m_EditorClassIdentifier: 
-  _name: Bite
+  _name: Mordida
   description: 
-  type: 8
+  type: 7
   power: 40
-  accuracy: 70
-  pp: 20
+  accuracy: 100
+  alwaysHit: 0
+  pp: 15
+  priority: 0
+  category: 0
+  effects:
+    boosts: []
+    status: 1
+    volatileStatus: 0
+  secondaryEffects:
+  - boosts: []
+    status: 1
+    volatileStatus: 0
+    chance: 70
+    target: 0
+  target: 0

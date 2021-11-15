@@ -31,7 +31,7 @@ public class BattleUnit : MonoBehaviour
     }
 
     public Monster Monster { get; set; }
-    public void Setup(Monster monster)
+    public void Setup(Monster monster,PlayerController player)
     {
         Monster = monster;
         if (isPlayerUnit)
@@ -39,7 +39,7 @@ public class BattleUnit : MonoBehaviour
         
         else
             image.sprite = Monster.Base.FrontSprite;
-        hud.SetData(monster);
+        hud.SetData(monster,player);
         image.color = originalColor;
         PlayEnterAnimation();
     }

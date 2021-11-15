@@ -48,14 +48,7 @@ public class Character : MonoBehaviour
     {
         animator.IsMoving = IsMoving;
     }
-    private bool isWalkable(Vector3 targetPos)
-    {
-        if (Physics2D.OverlapCircle(targetPos, 0.2f, GameLayers.i.SolidLayer|GameLayers.i.InteractableLayer) != null)
-        {
-            return false;
-        }
-        return true;
-    }
+    
     private bool isPathClear(Vector3 targetPos)
     {
         var diff = targetPos - transform.position;
@@ -82,6 +75,7 @@ public class Character : MonoBehaviour
             Debug.LogError("Error in Look Towards: You can't ask the character to look diagonally");
         }
     }
+
     public CharacterAnimator Animator
     {
         get => animator;
