@@ -10,5 +10,6 @@ public class Dialog
     public List<string> Lines
     {
         get { return lines; }
+        set { lines = value; }
     }
 }

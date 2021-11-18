@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public enum GameState { FreeRoam, Battle, Menu, Paused, Dialog, Cutscene, Inventory }
+public enum GameState { FreeRoam, Battle, Menu, Paused, Dialog, Cutscene, Inventory, StartScreen }
 
 public class GameController : MonoBehaviour,ISavable
 {
@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour,ISavable
     [SerializeField] BattleSystem battleSystem;
     [SerializeField] Camera worldCamera;
     [SerializeField] InventoryUI inventoryUI;
+    [SerializeField] StartScreen startScreen;
     GameState state;
     GameState previousState;
     bool isSetBattle;
@@ -28,11 +29,13 @@ public class GameController : MonoBehaviour,ISavable
     public static GameController Instance { get; private set; }
     private void Awake()
     {
+        StartGame();
         Instance = this;
         MonstersDB.Init();
         ConditionsDB.Init();
         ItemDB.Init();
         MoveDB.Init();
+        QuestDB.Init();
         menuController = GetComponent<MenuController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -67,11 +70,17 @@ public class GameController : MonoBehaviour,ISavable
               
               state= previousState;
           };
+        startScreen.onStartScreenSelected += OnStartScreenSelected;
 
           menuController.onMenuSelected += OnMenuSelected;
 
     }
 
+    public void StartGame()
+    {
+        state = GameState.StartScreen;
+        
+    }
     public void StartBattle()
     {
         isSetBattle = false;
@@ -158,6 +167,11 @@ public class GameController : MonoBehaviour,ISavable
              };
             inventoryUI.HandleUpdate(onBack);
         }
+        else if (state == GameState.StartScreen)
+        {
+            
+            startScreen.HandleUpdate();
+        }
     }
     public void SetCurrentScene(SceneDetails currScene)
     {
@@ -165,6 +179,27 @@ public class GameController : MonoBehaviour,ISavable
         CurrentScene = currScene;
     }
 
+    void OnStartScreenSelected(int selectedItem)
+    {
+        if (selectedItem == 0)
+        {
+            List<string> lines = new List<string>();
+            lines.Add("Bienvenido a The legend of the coding hero, un divertido juego en el que embarcarás una aventura como el guerrero de Thanya. Para moverte utiliza las teclas W A S D, o las flechas del teclado. Para abrir el menu presiona enter y para cerrarlo x, para seleccionar e interactuar con items y otros seres del mundo de Thanya presiona z.                                                                          Presiona Z para continuar");
+            lines.Add("El objetivo del juego es explorar el mundo y sus alrededores minetras combates monstruos usando tus conocimientos sobre programación. Libranos del mal de los monstruos, aventurero! Para empezar tu avetura deberías hablar con el mago Helmuth Dijkstraz.                                                         Presiona Z para cerrar el mensaje");
+            Dialog dialog = new Dialog()
+            {
+                Lines = lines
+            };
+            StartCoroutine(DialogManager.Instance.ShowBigDialogText(dialog));
+            state = GameState.FreeRoam;
+        }
+        else if (selectedItem == 1)
+        {
+            //LOAD
+            SavingSystem.i.Load("saveSlot1");
+            state = GameState.FreeRoam;
+        }
+    }
     void OnMenuSelected(int selectedItem)
     {
         if (selectedItem == 0)

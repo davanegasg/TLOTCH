@@ -16,13 +16,19 @@ MonoBehaviour:
   description: 
   startDialog:
     lines:
-    - Me corte mientras preparaba una pocion nueva
-    - necesito que me traigas una pocion para curarme y seguir trabajando en mi experimento
+    - Hola joven aventurero, mi nombre es Helmuth Dijkstra, te golpeaste fuertemente
+      la cabeza
+    - probablemente no recuerdes nada, asi que traeme una pocion, debe estar en ese
+      cofre azul
   inProgressDialog:
     lines:
-    - Trame una pocion para ayudarme!
+    - Traeme una pocion para ayudarte a curarte
   completedDialog:
     lines:
-    - Muchas gracias, termine mi pocion, tomala, te la mereces
+    - Gracias joven aventurero
+    - '*bebes la pocion y te sientes mejor*'
+    - No va sin decir pero debes tener cuidado al explorar, toma esta otra pocion
+      en caso
+    - de que la necesites.
   requiredItem: {fileID: 11400000, guid: 227f89680a8ac2e4e932429950044f48, type: 2}
   rewardItem: {fileID: 11400000, guid: a41b7b81c0fb75a4da8c656d4cf9c9c5, type: 2}

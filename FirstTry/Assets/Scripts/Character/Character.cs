@@ -9,15 +9,20 @@ public class Character : MonoBehaviour
     public float moveSpeed;
     public bool IsMoving { get; private set; }
     public float OffsetY { get; private set; } = 0.3f;
+
+    Vector2 moveVec;
     private void Awake()
     {
         animator = GetComponent<CharacterAnimator>();
         SetPositionAndSnapToTile(transform.position);
     }
-    public IEnumerator Move(Vector2 moveVec, Action OnMoveOver= null)
+    
+    public IEnumerator Move(Vector2 moveVec2, Action OnMoveOver= null)
     {
+        moveVec = moveVec2;
         animator.MoveX = Mathf.Clamp(moveVec.x, -1f, 1f);
         animator.MoveY = Mathf.Clamp(moveVec.y, -1f, 1f);
+       
         var targetPos = transform.position;
         targetPos.x += moveVec.x;
         targetPos.y += moveVec.y;
@@ -25,6 +30,7 @@ public class Character : MonoBehaviour
         if (!isPathClear(targetPos))
             yield break;
 
+        animator.IsMoving = true;
         IsMoving = true;
         while ((targetPos - transform.position).sqrMagnitude > Mathf.Epsilon)
         {
@@ -33,6 +39,7 @@ public class Character : MonoBehaviour
         }
         transform.position = targetPos;
         IsMoving = false;
+        animator.IsMoving = false;
 
         
         OnMoveOver?.Invoke();
